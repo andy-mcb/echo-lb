@@ -1,0 +1,24 @@
+cluster:
+  name: kind-echo-lb
+kubeProxyReplacement: true
+l2announcements:
+  enabled: true
+externalIPs:
+  enabled: true
+ipam:
+  mode: kubernetes
+gatewayAPI:
+  enabled: true
+ingressController:
+  enabled: true
+hubble:
+  enabled: true
+  relay:
+    enabled: true
+  ui:
+    enabled: true
+operator:
+  replicas: 1
+debug:
+  enabled: true
+  verbose: flow

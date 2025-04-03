@@ -1,0 +1,22 @@
+apiVersion: 'cilium.io/v2alpha1'
+kind: CiliumLoadBalancerIPPool
+metadata:
+  name: 'echo-lb-pool'
+spec:
+  allowFirstLastIPs: 'No'
+  blocks:
+    - cidr: '172.18.250.0/24' # 172.18.250.1 -> 172.18.250.254
+---
+apiVersion: 'cilium.io/v2alpha1'
+kind: CiliumL2AnnouncementPolicy
+metadata:
+  name: echo-lb-announcement-policy
+spec:
+  nodeSelector:
+    matchExpressions:
+      - key: node-role.kubernetes.io/control-plane
+        operator: DoesNotExist
+  interfaces:
+    - ^eth[0-9]+
+  externalIPs: false
+  loadBalancerIPs: true
