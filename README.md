@@ -5,7 +5,7 @@ A local Kubernetes cluster setup for macOS (M1/M2) using **Colima**, **Kind**, a
 Once complete, you'll have an Echo service available at:  
 👉 **https://echo.echo-lb.kube**
 
-This setup provides local LoadBalancer IP allocation that maps directly to `localhost`, making it ideal for testing production-like networking behavior in a local dev environment.
+This setup provides cluster exposed LoadBalancer IP's, making it ideal for testing production-like networking behavior in a local dev environment.
 
 ---
 
@@ -14,7 +14,7 @@ This setup provides local LoadBalancer IP allocation that maps directly to `loca
 This project includes:
 
 - A local Kubernetes cluster powered by **Kind** and **Colima**
-- **Cilium** as the CNI and service mesh
+- **Cilium** as the CNI and gateway api
 - A simple **Echo service** for testing
 - Local **DNS resolution**
 - Self-signed **TLS certificates**
@@ -40,6 +40,6 @@ To get everything up and running, follow these steps **in order**:
 ## 📖 Full Guide
 
 For a detailed walkthrough, including explanations of each step and troubleshooting tips,  
-📘 [Read the full article here](#)
+📘 [Read the full article here](https://medium.com/@andy.f.mcbrearty/running-k8s-locally-on-an-m1-macbook-with-colima-kind-1322afa4bfee)
 
 ---
