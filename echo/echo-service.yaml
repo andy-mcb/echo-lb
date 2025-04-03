@@ -1,0 +1,49 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: echo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: echo-app
+  namespace: echo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: echo-app
+      component: echo
+  template:
+    metadata:
+      labels:
+        app: echo-app
+        component: echo
+    spec:
+      containers:
+        - name: echo-app
+          image: hashicorp/http-echo:1.0.0
+          args:
+            - '-text=Hello World! This is Echo with kind App'
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 200m
+              memory: 128Mi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: echo-service
+  namespace: echo
+spec:
+  type: LoadBalancer
+  selector:
+    app: echo-app
+    component: echo
+  ports:
+    - port: 5678
+---
+
