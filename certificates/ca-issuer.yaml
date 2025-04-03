@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: selfsigned-issuer
+  namespace: cert-manager
+spec:
+  selfSigned: {}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: echo-lb-selfsigned-ca
+  namespace: cert-manager
+spec:
+  isCA: true
+  commonName: echo-lb-selfsigned-ca
+  secretName: echo-lb-ca-tls
+  subject:
+    organizations:
+      - 'echo-lb.kube'
+      - '*.echo-lb.kube'
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+  issuerRef:
+    name: selfsigned-issuer
+    kind: ClusterIssuer
+    group: cert-manager.io
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: echo-lb-ca-issuer
+  namespace: cert-manager
+spec:
+  ca:
+    secretName: echo-lb-ca-tls
